@@ -59,19 +59,18 @@ void testApp::update(){
 	spin	+= 5.0;
 
 	for (int i=0; i<A_SIZE; i++)
-		a[i].requestUpdate(1000/60);
+		a[i].update(1000/60);
 }
 
 
 void testApp::draw(){
 	ofSetupScreen();
-	
 	ofEnableAlphaBlending();
 	
 	camera.begin();
 	
 	for (int i=0; i<A_SIZE; i++)
-		a[i].requestDraw();
+		a[i].draw();
 
 	camera.end();
 }

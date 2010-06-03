@@ -5,23 +5,26 @@
 
 class animationCue {
 	int duration;
-	ofPoint move, rotate;
+	ofPoint move, rotate, scale;
 	float alpha;
 	float (*move_func)(float);
 	float (*rotate_func)(float);
+	float (*scale_func)(float);
 	float (*alpha_func)(float);
-	bool is_move, is_rotate, is_alpha;
+	bool is_move, is_rotate, is_scale, is_alpha;
 	
 public:
 	inline animationCue(){
 		is_move = false;
 		is_rotate = false;
+		is_scale = false;
 		is_alpha = false;
 	}
 	
 	inline animationCue(int duration){
 		is_move = false;
 		is_rotate = false;
+		is_scale = false;
 		is_alpha = false;
 		this->duration = duration;
 	}
@@ -37,6 +40,12 @@ public:
 		this->rotate_func = rotate_func;
 		this->is_rotate = true;
 	}
+
+	inline void setScale(ofPoint scale, float (*scale_func)(float)=animationFunctions::easeOut) {
+		this->scale = scale;
+		this->scale_func = scale_func;
+		this->is_scale = true;
+	}
 	
 	inline void setAlpha(float alpha, float (*alpha_func)(float)=animationFunctions::easeOut) {
 		this->alpha = alpha;
@@ -50,6 +59,10 @@ public:
 	
 	inline ofPoint getRotate(){
 		return rotate;
+	}
+	
+	inline ofPoint getScale(){
+		return scale;
 	}
 	
 	inline float getAlpha() {
@@ -71,6 +84,10 @@ public:
 	inline float (*getRotateFunc())(float) {
 		return rotate_func;
 	}	
+	
+	inline float (*getScaleFunc())(float) {
+		return scale_func;
+	}
 
 	inline float (*getAlphaFunc())(float) {
 		return alpha_func;
@@ -83,7 +100,11 @@ public:
 	inline bool isRotate(){
 		return is_rotate;
 	}
-
+	
+	inline bool isScale(){
+		return is_scale;
+	}
+	
 	inline bool isAlpha(){
 		return is_alpha;
 	}	

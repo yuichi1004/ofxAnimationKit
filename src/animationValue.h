@@ -57,12 +57,14 @@ public:
 	}
 	
 	inline void go(T _to, int _duration){
+		from = get();
 		to=_to;
 		duration=_duration;
 		current=0;
 	}
 	
 	inline void go(T _to, int _duration, float (*f)(float)){
+		from = get();
 		to=_to;
 		duration=_duration;
 		animeFunc=f;

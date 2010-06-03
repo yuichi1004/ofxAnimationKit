@@ -13,6 +13,7 @@ class actor: public actorBase {
 protected:
 	animationValue<ofPoint> pos;
 	animationValue<ofPoint> rot;
+	animationValue<ofPoint> scale;
 	animationValue<float> alpha_anime;
 	
 	std::queue<animationCue> animationCues;
@@ -24,6 +25,7 @@ public:
 	
 	void setPosition(ofPoint pos);
 	void setRotation(ofPoint rot);
+	void setScale(ofPoint rot);
 	
 	void pushMove(int duration, const ofPoint pos, float (*f)(float)=animationFunctions::easeOut);
 	void pushMove(animationCue cue);
@@ -32,9 +34,12 @@ public:
 	
 	void setLoop(bool b);
 	inline bool isLoop() {return loop;};
+	
+	bool isAnimationFinished();
+
 protected:
-	virtual void update(int sec);
-	virtual void draw();
+	virtual void onUpdate(int sec);
+	virtual void onDraw();
 };
 
 

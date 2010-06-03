@@ -18,8 +18,8 @@ public:
 	void loadImage(string file);
 	
 protected:
-	virtual void update(int sec);
-	virtual void draw();
+	virtual void onUpdate(int sec);
+	virtual void onDraw();
 };
 
 

@@ -1,6 +1,6 @@
 #include "actorBase.h"
 
-// Constructor
+
 actorBase::actorBase() {
 }
 
@@ -14,21 +14,26 @@ actorBase::~actorBase() {
 }
 
 
-void actorBase::update(int sec) {
+void actorBase::onUpdate(int sec) {
 }
 
 
-void actorBase::draw() {
+void actorBase::onDraw() {
 }
 
 
-void actorBase::setPosition(ofPoint _pos){
-	position = _pos;
+void actorBase::setPosition(ofPoint pos){
+	this->position = pos;
 }
 
 
-void actorBase::setRotation(ofPoint _rot){
-	rotation = _rot;
+void actorBase::setRotation(ofPoint rot){
+	this->rotation = rot;
+}
+
+
+void actorBase::setScale(ofPoint scale){
+	this->scale = scale;
 }
 
 
@@ -42,14 +47,19 @@ ofPoint actorBase::getRotation() {
 }
 
 
-void actorBase::requestUpdate(int sec) {
-	this->update(sec);
+ofPoint actorBase::getScale() {
+	return scale;
 }
 
-void actorBase::requestDraw() {
+
+void actorBase::update(int sec) {
+	this->onUpdate(sec);
+}
+
+void actorBase::draw() {
 	//ofPushStyle();
 	glPushMatrix();
-	this->draw();
+	this->onDraw();
 	glPopMatrix();
 	//ofPopStyle();
 }

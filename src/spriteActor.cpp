@@ -22,17 +22,18 @@ spriteActor::~spriteActor(){
 void spriteActor::loadImage(string file) {
 	image = new ofImage();
 	image->loadImage(file);
+	image->setImageType(OF_IMAGE_COLOR_ALPHA);
 	is_image_owner = true;	
 }
 
 
-void spriteActor::update(int sec){
-	actor::update(sec);
+void spriteActor::onUpdate(int sec){
+	actor::onUpdate(sec);
 }
 
 
-void spriteActor::draw(){
-	actor::draw();
+void spriteActor::onDraw(){
+	actor::onDraw();
 	if ( image!=NULL ){
 		glPushMatrix();
 		glTranslatef(-image->getWidth()/2.0f,-image->getHeight()/2.0f,0.0f);

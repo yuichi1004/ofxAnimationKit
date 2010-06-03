@@ -7,6 +7,7 @@ class actorBase {
 protected:
 	ofPoint position;
 	ofPoint rotation;
+	ofPoint scale;
 	float alpha;
 	
 public:
@@ -14,17 +15,19 @@ public:
 	actorBase(ofPoint _pos);
 	virtual ~actorBase();
 	
-	virtual void setPosition(ofPoint _pos);
-	virtual void setRotation(ofPoint _rot);
+	virtual void setPosition(ofPoint pos);
+	virtual void setRotation(ofPoint rot);
+	virtual void setScale(ofPoint scale);
 	virtual ofPoint getPosition();
 	virtual ofPoint getRotation();
+	virtual ofPoint getScale();
 	
-	void requestUpdate(int sec);
-	void requestDraw();
+	void update(int sec);
+	void draw();
 	
 protected:
-	virtual void update(int sec);
-	virtual void draw();
+	virtual void onUpdate(int sec);
+	virtual void onDraw();
 };
 
 
