@@ -14,7 +14,7 @@ actorBase::~actorBase() {
 }
 
 
-void actorBase::onUpdate(int sec) {
+void actorBase::onUpdate(int msec) {
 }
 
 
@@ -37,6 +37,16 @@ void actorBase::setScale(ofPoint scale){
 }
 
 
+void actorBase::setBasePoint(ofPoint basePoint){
+	this->basePoint = basePoint;
+}
+
+
+void actorBase::setAlpha(float alpha) {
+	this->alpha = alpha;
+}
+
+
 ofPoint actorBase::getPosition() {
 	return position;
 }
@@ -52,9 +62,24 @@ ofPoint actorBase::getScale() {
 }
 
 
-void actorBase::update(int sec) {
-	this->onUpdate(sec);
+ofPoint actorBase::getBasePoint() {
+	return basePoint;
 }
+
+
+ofPoint actorBase::getSize() {
+	return ofPoint(0,0,0);
+}
+
+
+float actorBase::getAlpha() {
+	return alpha;
+}
+
+void actorBase::update(int msec) {
+	this->onUpdate(msec);
+}
+
 
 void actorBase::draw() {
 	//ofPushStyle();
@@ -64,3 +89,7 @@ void actorBase::draw() {
 	//ofPopStyle();
 }
 
+
+bool actorBase::isAnimationFinished() {
+	return true;
+}

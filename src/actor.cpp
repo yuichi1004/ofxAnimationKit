@@ -16,11 +16,11 @@ actor::actor(ofPoint pos): actorBase(pos) {
 }
 
 
-void actor::onUpdate(int sec) {
-	pos.update(sec);
-	rot.update(sec);
-	scale.update(sec);
-	alpha_anime.update(sec);
+void actor::onUpdate(int msec) {
+	pos.update(msec);
+	rot.update(msec);
+	scale.update(msec);
+	alpha_anime.update(msec);
 	
 	if (pos.isFinished()&&rot.isFinished()&&!animationCues.empty()){
 		animationCue c=animationCues.front();
@@ -30,7 +30,7 @@ void actor::onUpdate(int sec) {
 		animationCues.pop();
 	}
 	
-	actorBase::onUpdate(sec);
+	actorBase::onUpdate(msec);
 }
 
 
@@ -43,6 +43,7 @@ void actor::onDraw() {
 	ofRotate(r.z, 0.0f, 0.0f, 1.0f);
 	ofPoint s = scale;
 	ofScale(s.x, s.y, s.z);
+	ofTranslate(basePoint.x, basePoint.y, basePoint.z);
 	
 	float al = (float)alpha_anime;
 	int a = (int)(255.0f * (float)alpha_anime);
@@ -70,7 +71,33 @@ void actor::setScale(ofPoint scale){
 }
 
 
-void actor::pushMove(int duration, const ofPoint pos, float (*f)(float)){
+void actor::setAlpha(float alpha){
+	this->alpha_anime.set(alpha);
+	actorBase::setAlpha(alpha);
+}
+
+
+ofPoint actor::getPosition(){
+	return this->pos;
+}
+
+
+ofPoint actor::getRotation(){
+	return this->rot;
+}
+
+
+ofPoint actor::getScale(){
+	return this->scale;
+}
+
+
+float actor::getAlpha() {
+	return this->alpha_anime;
+}
+
+
+void actor::pushMove(int duration, ofPoint pos, float (*f)(float)){
 	animationCue c;
 	c.setMove(pos, f);
 	c.setDuration(duration);
@@ -83,7 +110,7 @@ void actor::pushMove(animationCue c){
 }
 
 
-void actor::move(int duration, const ofPoint pos, float (*f)(float)){
+void actor::move(int duration, ofPoint pos, float (*f)(float)){
 	this->pos.go(pos,duration,f);
 }
 

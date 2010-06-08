@@ -1,5 +1,5 @@
-#ifndef __SPRITE_ACTOR_H_
-#define __SPRITE_ACTOR_H_
+#ifndef __SPRITE_ACTOR_H__
+#define __SPRITE_ACTOR_H__
 
 #include "ofMain.h"
 #include "actor.h"
@@ -15,10 +15,17 @@ public:
 	spriteActor(string file, ofPoint _pos=ofPoint(0,0,0));
 	~spriteActor();
 	
-	void loadImage(string file);
+	void load(string file);
+	void setImage(ofImage* img, bool isOwner);
+	ofImage* getImage();
+	
+	int getSpriteWidth();
+	int getSpriteHeight();
+	
+	ofPoint getSize();
 	
 protected:
-	virtual void onUpdate(int sec);
+	virtual void onUpdate(int msec);
 	virtual void onDraw();
 };
 
