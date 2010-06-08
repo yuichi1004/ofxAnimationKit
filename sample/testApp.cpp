@@ -5,8 +5,8 @@
 #include "spriteActor.h"
 
 #define A_SIZE 50
-spriteActor a[A_SIZE];
 
+spriteActor a[A_SIZE];
 
 void testApp::setup(){
 	ofBackground(0, 0, 0);
@@ -24,27 +24,23 @@ void testApp::setup(){
 		a[i].load("image.png");		
 		a[i].setPosition(ofPoint(0,0,0));
 		
-		int w=1024;
-		int wb=w/2;
-		int h=768;
-		int hb=h/2;
 		a[i].setLoop(true);
 		
 		animationCue c(1000);
-		c.setMove(ofPoint(rand()%w-wb,rand()%h-hb,rand()%200));
+		c.setMove(ofPoint(ofRandomWidth(),ofRandomHeight(),rand()%200));
 		c.setRotate(ofPoint(360*2,0,0));
 		c.setAlpha(1.0f);
 		a[i].pushMove(c);
 		
-		c.setMove(ofPoint(rand()%w-wb,rand()%h-hb,rand()%200));
+		c.setMove(ofPoint(ofRandomWidth(),ofRandomHeight(),rand()%200));
 		c.setRotate(ofPoint(0,0,0));
 		a[i].pushMove(c);
 		
-		c.setMove(ofPoint(rand()%w-wb,rand()%h-hb,rand()%200));
+		c.setMove(ofPoint(ofRandomWidth(),ofRandomHeight(),rand()%200));
 		c.setRotate(ofPoint(0,360*2,0));
 		a[i].pushMove(c);
 		
-		c.setMove(ofPoint(rand()%w-wb,rand()%h-hb,rand()%200));
+		c.setMove(ofPoint(ofRandomWidth(),ofRandomHeight(),rand()%200));
 		c.setRotate(ofPoint(0,0,0));
 		c.setAlpha(0.0f);
 		a[i].pushMove(c);
