@@ -10,37 +10,30 @@ spriteActor a[A_SIZE];
 
 void testApp::setup(){
 	ofBackground(0, 0, 0);
-	
-	//lets make our circles look a little nicer!
-	ofSetCircleResolution(40);
-	
-	//for smooth animation, set vertical sync if we can
 	ofSetVerticalSync(true);
-	
-	// also, frame rate:
 	ofSetFrameRate(60);
 	
 	for (int i=0; i<A_SIZE; i++){
 		a[i].load("image.png");		
-		a[i].setPosition(ofPoint(0,0,0));
+		a[i].setPosition(ofPoint(ofGetScreenWidth()/2,ofGetScreenHeight()/2,0));
 		
 		a[i].setLoop(true);
 		
 		animationCue c(1000);
-		c.setMove(ofPoint(ofRandomWidth(),ofRandomHeight(),rand()%200));
+		c.setMove(ofPoint(rand()%ofGetScreenWidth(),rand()%ofGetScreenHeight(),rand()%200));
 		c.setRotate(ofPoint(360*2,0,0));
 		c.setAlpha(1.0f);
 		a[i].pushMove(c);
 		
-		c.setMove(ofPoint(ofRandomWidth(),ofRandomHeight(),rand()%200));
+		c.setMove(ofPoint(rand()%ofGetScreenWidth(),rand()%ofGetScreenHeight(),rand()%200));
 		c.setRotate(ofPoint(0,0,0));
 		a[i].pushMove(c);
 		
-		c.setMove(ofPoint(ofRandomWidth(),ofRandomHeight(),rand()%200));
+		c.setMove(ofPoint(rand()%ofGetScreenWidth(),rand()%ofGetScreenHeight(),rand()%200));
 		c.setRotate(ofPoint(0,360*2,0));
 		a[i].pushMove(c);
 		
-		c.setMove(ofPoint(ofRandomWidth(),ofRandomHeight(),rand()%200));
+		c.setMove(ofPoint(rand()%ofGetScreenWidth(),rand()%ofGetScreenHeight(),rand()%200));
 		c.setRotate(ofPoint(0,0,0));
 		c.setAlpha(0.0f);
 		a[i].pushMove(c);
