@@ -1,0 +1,39 @@
+body {
+	width: 900px;
+	padding: 10px;
+	margin: 0px auto 0px auto;
+	border-top: solid 10px black;
+	border-left: solid 1px dimgrey;
+	border-right: solid 1px dimgrey;
+}
+
+h1 {
+	font-size: 1.2em;
+}
+
+h2 {
+	font-size: 1.0em;
+	margin-bottom: 5px;
+}
+
+h3 {
+	font-size: 1.0em;
+	border-bottom: 1px dashed dimgrey;
+	margin-bottom: 5px;
+}
+
+ul {
+	margin: 0;
+}
+
+.source {
+	width: 800px;
+	height: 300px;
+	margin: 10px 50px 20px 50px;
+	border: 1px solid dimgrey;
+}
+
+.source_min {
+	height: 100px !important;
+}
+

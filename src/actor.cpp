@@ -32,20 +32,6 @@ void actor::onUpdate(int msec) {
 }
 
 
-void actor::update(int msec) {
-	this->onUpdate(msec);
-}
-
-
-void actor::draw() {
-	//ofPushStyle();
-	glPushMatrix();
-	this->onDraw();
-	glPopMatrix();
-	//ofPopStyle();
-}
-
-
 void actor::onDraw() {
 	ofPoint p = pos;
 	ofTranslate(p.x, p.y, p.z);
@@ -60,6 +46,21 @@ void actor::onDraw() {
 	float al = (float)alpha_anime;
 	int a = (int)(255.0f * (float)alpha_anime);
 	ofSetColor(255, 255, 255, a);
+}
+
+
+void actor::update(int msec) {
+	this->onUpdate(msec);
+}
+
+
+
+void actor::draw() {
+	//ofPushStyle();
+	glPushMatrix();
+	this->onDraw();
+	glPopMatrix();
+	//ofPopStyle();
 }
 
 

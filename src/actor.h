@@ -8,7 +8,15 @@
 #include <queue>
 #include <list>
 
-
+/**
+ * @brief Represents animation-enabled 3D/2D object.
+ *
+ * This is the most basic class of the ofxAnimationKit.
+ * Any animatable objects derived this class.
+ *
+ * You can make original animation-enabled classes deriving this class.
+ * In this case, the derived class may basically override functions, onUpdate(int) and onDraw().
+ */
 class actor: public IActor {
 protected:
 	animationValue<ofPoint> pos;

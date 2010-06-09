@@ -1,5 +1,8 @@
+
+
 #ifndef __I_ACTOR_H__
 #define __I_ACTOR_H__
+
 
 class IActor {
 public:

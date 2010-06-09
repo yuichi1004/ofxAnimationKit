@@ -52,3 +52,4 @@ void testApp::draw(){
 	for (int i=0; i<STARS_SIZE; i++)
 		stars[i].draw();
 }
+
