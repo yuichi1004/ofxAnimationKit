@@ -16,6 +16,8 @@ public:
 	virtual ofPoint getBasePoint() = 0;
 	
 	virtual ofPoint getSize() = 0;
+	virtual void setAlpha(float alpha) = 0;
+	virtual float getAlpha() = 0;
 	
 	virtual void update(int msec) = 0;
 	virtual void draw() = 0;

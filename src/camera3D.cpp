@@ -9,6 +9,7 @@ void camera3D::begin(){
 	glMatrixMode(GL_MODELVIEW);
 	glPushMatrix();
 	glLoadIdentity();
+	ofPoint position = getPosition();
 	gluLookAt(position.x,position.y,position.z,
 			 0,0,0,
 			 0,1,0);

@@ -1,5 +1,4 @@
 #include "actor.h"
-#include "actorBase.h"
 #include "animationCue.h"
 #include "ofMain.h"
 
@@ -10,7 +9,8 @@ actor::actor() {
 }
 
 
-actor::actor(ofPoint pos): actorBase(pos) {
+actor::actor(ofPoint pos) {
+	setPosition(pos);
 	setScale(ofPoint(1,1,1));
 	alpha_anime.set(1.0f);
 }
@@ -29,8 +29,20 @@ void actor::onUpdate(int msec) {
 			animationCues.push(c);
 		animationCues.pop();
 	}
-	
-	actorBase::onUpdate(msec);
+}
+
+
+void actor::update(int msec) {
+	this->onUpdate(msec);
+}
+
+
+void actor::draw() {
+	//ofPushStyle();
+	glPushMatrix();
+	this->onDraw();
+	glPopMatrix();
+	//ofPopStyle();
 }
 
 
@@ -48,32 +60,31 @@ void actor::onDraw() {
 	float al = (float)alpha_anime;
 	int a = (int)(255.0f * (float)alpha_anime);
 	ofSetColor(255, 255, 255, a);
-	
-	actorBase::onDraw();
 }
 
 
 void actor::setPosition(ofPoint pos){
 	this->pos.set(pos);
-	actorBase::setPosition(pos);
 }
 
 
 void actor::setRotation(ofPoint rot){
 	this->rot.set(rot);
-	actorBase::setRotation(rot);
 }
 
 
 void actor::setScale(ofPoint scale){
 	this->scale.set(scale);
-	actorBase::setScale(scale);
 }
 
 
 void actor::setAlpha(float alpha){
 	this->alpha_anime.set(alpha);
-	actorBase::setAlpha(alpha);
+}
+
+
+void actor::setBasePoint(ofPoint basePoint) {
+	this->basePoint = basePoint;
 }
 
 
@@ -94,6 +105,16 @@ ofPoint actor::getScale(){
 
 float actor::getAlpha() {
 	return this->alpha_anime;
+}
+
+
+ofPoint actor::getSize() {
+	return ofPoint(0,0,0);
+}
+
+
+ofPoint actor::getBasePoint() {
+	return this->basePoint;
 }
 
 
