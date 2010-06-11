@@ -17,24 +17,35 @@ void testApp::setup(){
 		
 		stars[i].setLoop(true);
 		
+		int w = ofGetScreenWidth();
+		int h = ofGetScreenHeight();
+		int v = 200;
+
+		stars[i].pushMove(1000,ofPoint(rand()%w,rand()%h,rand()%v));
+		stars[i].pushMove(1000,ofPoint(rand()%w,rand()%h,rand()%v));
+		stars[i].pushMove(1000,ofPoint(rand()%w,rand()%h,rand()%v));
+		stars[i].pushMove(1000,ofPoint(rand()%w,rand()%h,rand()%v));
+		
+		/* Complicated animation Version
 		animationCue c(1000);
-		c.setMove(ofPoint(rand()%ofGetScreenWidth(),rand()%ofGetScreenHeight(),rand()%200));
+		c.setMove(ofPoint(rand()%w,rand()%h,rand()%v));
 		c.setRotate(ofPoint(360*2,0,0));
 		c.setAlpha(1.0f);
 		stars[i].pushMove(c);
 		
-		c.setMove(ofPoint(rand()%ofGetScreenWidth(),rand()%ofGetScreenHeight(),rand()%200));
+		c.setMove(ofPoint(rand()%w,rand()%h,rand()%v));
 		c.setRotate(ofPoint(0,0,0));
 		stars[i].pushMove(c);
 		
-		c.setMove(ofPoint(rand()%ofGetScreenWidth(),rand()%ofGetScreenHeight(),rand()%200));
+		c.setMove(ofPoint(rand()%w,rand()%h,rand()%v));
 		c.setRotate(ofPoint(0,360*2,0));
 		stars[i].pushMove(c);
 		
-		c.setMove(ofPoint(rand()%ofGetScreenWidth(),rand()%ofGetScreenHeight(),rand()%200));
+		c.setMove(ofPoint(rand()%w,rand()%h,rand()%v));
 		c.setRotate(ofPoint(0,0,0));
 		c.setAlpha(0.0f);
 		stars[i].pushMove(c);
+		 */
 	}
 }
 

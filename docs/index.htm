@@ -8,25 +8,151 @@
 <body>
 
 <h1>ofxAnimationKit Documentation</h1> 
-<p>ofxAnimationKit is the animation framework for openFrameworks.</p>
+<p>ofxAnimationKit is an animation framework for openFrameworks.</p>
 
 <h2>Contents</h2>
 <ul>
+	<li><a href="#why">Why ofxAnimationKit?</a></li>
 	<li><a href="#getting_start">Getting start</a></li>
-	<li><a href="#declear_combined_animation">Declear combined animation</a></li>
-	<li><a href="#declear_multiple_animation">Declear multiple animation</a></li>
+	<li><a href="#declares_animation_with_easing">Declares animation with easing</a></li>
+	<li><a href="#declares_combined_animation">Declares combined animation</a></li>
 </ul>
 
+<h3><a name="why">Why ofxAnimationKit</a></h3>
+<p>ofxAnimationKit provides the powerful animation with simple source code.
+Animation is necessary for smart UIs.  The following video is the presentation viewer written by this
+framework.  This framework is useful for developing these kinds of products.</p>
+<a href="demo.m4v">[Demo Video]</a><br />
+<video src="demo.m4v" width="320" height="240" controls></video>
+
 <h3><a name="getting_start">Getting start</a></h3>
-<p>The following source code shows the simple use of this </p>
-<iframe src="getting_start.cpp" class="source"></iframe>
+<p>The following source code shows the simple usage of this kit.  This sample loads the star sprite images
+ and move them to random places.</p>
+<a href="getting_start.cpp">[Source]</a>
+<pre class="source">
+#include &lt;stdlib.h&gt;
+#include "testApp.h"
+#include "ofxAnimationKit.h"
 
-<h3><a name="declear_combined_animation">Declear combined animation</a></h3>
-<p>Combined declearation can be written by animationCue.  The following code represents, moving, rotating and fading simulteniously in 1000 msec.</p>
-<iframe src="declear_combined_animation.cpp" class="source source_min"></iframe>
+#define STARS_SIZE 50
+spriteActor stars[STARS_SIZE];
 
-<h3><a name="declear_multiple_animation">Declear multiple animation</a></h3>
-<p>topics...</p>
+void testApp::setup(){
+	ofBackground(0, 0, 0);
+	ofSetVerticalSync(true);
+	ofSetFrameRate(60);
+	
+	// Loads images and declares the star's animation.
+	for (int i=0; i&lt;STARS_SIZE; i++){
+		stars[i].load("image.png");		
+		stars[i].setPosition(ofPoint(ofGetScreenWidth()/2,ofGetScreenHeight()/2,0));
+	
+		int w = ofGetScreenWidth();
+		int h = ofGetScreenHeight();
+		int v = 200;
+	
+		stars[i].setLoop(true);
+		stars[i].pushMove(1000,ofPoint(rand()%w,rand()%h,rand()%v));
+		stars[i].pushMove(1000,ofPoint(rand()%w,rand()%h,rand()%v));
+		stars[i].pushMove(1000,ofPoint(rand()%w,rand()%h,rand()%v));
+	}
+}
+
+
+void testApp::update(){
+	for (int i=0; i&lt;STARS_SIZE; i++)
+		stars[i].update(1000/60);
+}
+
+
+void testApp::draw(){
+	ofSetupScreen();
+	ofEnableAlphaBlending();
+	
+	for (int i=0; i&lt;STARS_SIZE; i++)
+		stars[i].draw();
+}
+</pre>
+
+<p>Here is the result video of this program. </p>
+<a href="stars.m4v">[Demo Video]</a><br />
+<video src="stars.m4v" width="320" height="240" controls></video>
+
+
+<p>First, initialize actors, animation-enabled object.  spriteActor represents the animation-enabled sprite.  Loads the image with function load().</p>
+
+<pre class="source">
+spriteActor stars[STARS_SIZE];
+...
+stars[i].load("image.png");		
+</pre>
+
+<p>Second, declaries the animation.  In the following example, 1000 is the duration in millisecond and ofPoint(...) is the destination of the moving.  There are 2 functions, pushMove and move.  Function pushMove() reserves an animation after all animations reserved before.  
+Function move() discards all the reserved animation and immediatory starts the new animation.</p>
+
+<pre class="source">
+stars[i].pushMove(1000,ofPoint(rand()%w,rand()%h,rand()%v));
+</pre>
+
+<pre class="source">
+stars[i].move(1000,ofPoint(rand()%w,rand()%h,rand()%v));
+</pre>
+
+
+<p>Third, callbacks functions update() and draw(). </p>
+
+<pre class="source">
+void testApp::update(){
+	for (int i=0; i&lt;STARS_SIZE; i++)
+		stars[i].update(1000/60);
+}
+
+
+void testApp::draw(){
+	ofSetupScreen();
+	ofEnableAlphaBlending();
+	
+	for (int i=0; i&lt;STARS_SIZE; i++)
+		stars[i].draw();
+}
+</pre>
+
+<h3><a name="declares_animation_with_easing">Declares animation with easing</a></h3>
+<p>The following code shows how to declare the animation with easing function.
+The easing function represents the animation speed.  The following animation is acceleratvie and deaccelerative.</p>
+
+<pre class="source">
+spriteActor star;
+star.move(1000, ofPoint(100,100,0), animationFunctions::easeInOut);
+</pre>
+
+<p>Theare are some easing functions <a href="easing_functions.htm">[here]</a>.</p>
+
+<p>Programmers can also define your original easing function.</p>
+
+<pre class="source">
+float original_easing(float t) {
+	return t*t*t*t;
+}
+...
+star.move(1000, ofPoint(100,100,0), original_easing);
+</pre>
+
+<h3><a name="declares_combined_animation">Declares combined animation</a></h3>
+<p>The following code shows how to declares the combined animation with animationCue.  The following code represents, moving, rotating and fading simulteniously in 1000 msec.</p>
+<pre class="source">
+spriteActor star;
+animationCue c(1000);
+c.setMove(ofPoint(rand()%ofGetScreenWidth(),rand()%ofGetScreenHeight(),rand()%200));
+c.setRotate(ofPoint(360*2,0,0));
+c.setAlpha(1.0f);
+star.move(c);
+</pre>
+
+<div class="footer">
+Send feedback to <a href="http://twitter.com/yuichi1004">yuichi1004</a> by twitter.
+</div>
 
 </body>
 </html>
+

@@ -10,31 +10,19 @@ void testApp::setup(){
 	ofSetVerticalSync(true);
 	ofSetFrameRate(60);
 	
-	// Loads images and declear the star's animation.
+	// Loads images and declares the star's animation.
 	for (int i=0; i<STARS_SIZE; i++){
 		stars[i].load("image.png");		
 		stars[i].setPosition(ofPoint(ofGetScreenWidth()/2,ofGetScreenHeight()/2,0));
-		
+	
+		int w = ofGetScreenWidth();
+		int h = ofGetScreenHeight();
+		int v = 200;
+	
 		stars[i].setLoop(true);
-		
-		animationCue c(1000);
-		c.setMove(ofPoint(rand()%ofGetScreenWidth(),rand()%ofGetScreenHeight(),rand()%200));
-		c.setRotate(ofPoint(360*2,0,0));
-		c.setAlpha(1.0f);
-		stars[i].pushMove(c);
-		
-		c.setMove(ofPoint(rand()%ofGetScreenWidth(),rand()%ofGetScreenHeight(),rand()%200));
-		c.setRotate(ofPoint(0,0,0));
-		stars[i].pushMove(c);
-		
-		c.setMove(ofPoint(rand()%ofGetScreenWidth(),rand()%ofGetScreenHeight(),rand()%200));
-		c.setRotate(ofPoint(0,360*2,0));
-		stars[i].pushMove(c);
-		
-		c.setMove(ofPoint(rand()%ofGetScreenWidth(),rand()%ofGetScreenHeight(),rand()%200));
-		c.setRotate(ofPoint(0,0,0));
-		c.setAlpha(0.0f);
-		stars[i].pushMove(c);
+		stars[i].pushMove(1000,ofPoint(rand()%w,rand()%h,rand()%v));
+		stars[i].pushMove(1000,ofPoint(rand()%w,rand()%h,rand()%v));
+		stars[i].pushMove(1000,ofPoint(rand()%w,rand()%h,rand()%v));
 	}
 }
 
@@ -52,4 +40,3 @@ void testApp::draw(){
 	for (int i=0; i<STARS_SIZE; i++)
 		stars[i].draw();
 }
-

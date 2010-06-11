@@ -1,6 +1,11 @@
 #ifndef _ANIME_VALUE_H__
 #define _ANIME_VALUE_H__
 
+/**
+ Animation functions
+ Some functions based on the robertpenner's easing function.
+ See also http://www.robertpenner.com/easing/easing_demo.html
+ */
 class animationFunctions {
 public:
 	static inline float linear(float t){
@@ -10,16 +15,40 @@ public:
 		return t*t;
 	}
 	static inline float easeOut(float t){
-		return 2*t-t*t;
-	}
-	static inline float easeInQuad(float t){
-		return t*t*t*t;
-	}
-	static inline float easeOutQuad(float t){
-		return (t-t*t*t*t/4.0f)*4.0/3.0f;
+		return 2.0f*t-t*t;
 	}
 	static inline float easeInOut(float t){
-		return 3*t*t-2*t*t*t;
+		return 3.0f*t*t-2.0f*t*t*t;
+	}
+	static inline float easeInCubic(float t){
+		return t*t*t;
+	}
+	static inline float easeOutCubic(float t){
+		return (-t*t*t+3.0f*t)/2.0f;
+	}
+	static inline float easeInOutCubic(float t){
+		if (t<0.5f) {
+			t*=2.0f;
+			return t*t*t/2.0f;
+		}
+		t=(t-0.5f)*2.0f;
+		return 0.5f+(-t*t*t+3.0f*t)/4.0f;
+	}
+	static inline float bounce(float t) {
+		if (t<1.0f/2.75f) {
+			return (7.5625f*t*t);
+		} else if (t<2.0f/2.75f) {
+			t-=1.5f/2.75f;
+			return (7.5625f*t*t+.75f);
+		} else if (t <2.5f/2.75f) {
+			t-=2.25f/2.75f;
+			return (7.5625f*t*t+.9375f);
+		} else {
+			t-=(2.625f/2.75f);
+			return (7.5625f*t*t + .984375);
+		}
+		
+		// if (x<1.0/2.75){7.5625*x*x} else{0}
 	}
 };
 
